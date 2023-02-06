@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Objects;
 
 public class Cliente {
@@ -17,6 +19,9 @@ public class Cliente {
 	}
 
 	public Cliente(Cliente cliente) {
+		if(cliente == null) {
+			throw new NullPointerException("ERROR: No es posible copiar un cliente nulo.");
+		}
 		setNombre(cliente.getNombre());
 		setDni(cliente.getDni());
 		setTelefono(cliente.getTelefono());
@@ -26,25 +31,28 @@ public class Cliente {
 	private boolean comprobarLetraDni(String dni) {
 		char[] letraDni = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E' };
 		char letradni = dni.charAt(dni.length() -1);
-        
-			
+		int numDni = Integer.parseInt(dni.substring(0, dni.length()-1));
+        int resto = numDni%23;
+        return (letraDni[resto] == letradni);
 		}
 
 
-	}
-
-	public Cliente getClienteConDni(String dni) {
-		return ;
+	public static Cliente getClienteConDni(String dni) {
+		return new Cliente("Marta",dni,"666666666");
 
 	}
-
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
+		if(nombre == null) {
+			throw new NullPointerException("ERROR: El nombre no puede ser nulo.");
+		}
+		if(!nombre.matches(ER_NOMBRE)) {
+			throw new IllegalArgumentException("ERROR: El nombre no tiene un formato válido.");
+		}
 		this.nombre = nombre;
 	}
 
@@ -53,6 +61,16 @@ public class Cliente {
 	}
 
 	private void setDni(String dni) {
+		if(dni == null) {
+			throw new NullPointerException("ERROR: El DNI no puede ser nulo.");
+		}
+		if(!dni.matches(ER_DNI)) {
+			throw new IllegalArgumentException("ERROR: El DNI no tiene un formato válido.");
+		}
+		if(!comprobarLetraDni(dni)) {
+			throw new IllegalArgumentException("ERROR: La letra del DNI no es correcta.");
+		}
+			
 		this.dni = dni;
 	}
 
@@ -61,15 +79,19 @@ public class Cliente {
 	}
 
 	public void setTelefono(String telefono) {
+		if(telefono == null) {
+			throw new NullPointerException("ERROR: El teléfono no puede ser nulo.");
+		}
+		if(!telefono.matches(ER_TELEFONO)){
+			throw new IllegalArgumentException("ERROR: El teléfono no tiene un formato válido.");
+		}
 		this.telefono = telefono;
 	}
 
-
-
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(dni, nombre, telefono);
+		return Objects.hash(dni);
+		
 	}
 
 	@Override
@@ -81,13 +103,12 @@ public class Cliente {
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		return Objects.equals(dni, other.dni) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(telefono, other.telefono);
+		return Objects.equals(dni, other.dni);
 	}
 
 	@Override
 	public String toString() {
-		return "Cliente [nombre=" + nombre + ", dni=" + dni + ", telefono=" + telefono + "]";
+		return(String.format("%s - %s (%s)", nombre, dni, telefono));
 	}
 	
 	
