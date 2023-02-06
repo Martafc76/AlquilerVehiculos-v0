@@ -18,7 +18,6 @@ public class TurismoTest {
 	private static final String MENSAJE_ERROR_MATRICULA_NULA = "ERROR: La matrícula no puede ser nula.";
 	private static final String MENSAJE_ERROR_FORMATO_MATRICULA_NO_VALIDA = "ERROR: La matrícula no tiene un formato válido.";
 	private static final String MENSAJE_ERROR_TURISMO_NULO = "ERROR: No es posible copiar un turismo nulo.";
-	
 	private static final String MARCA_VALIDA = "Seat";
 	private static final String MODELO_VALIDO = "León";
 	private static final int CILINDRADA_VALIDA = 90;
