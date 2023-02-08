@@ -112,7 +112,7 @@ public class Turismo {
 
 	@Override
 	public String toString() {
-		return(String.format("%s %s (%sCV) - %s", marca, modelo, cilindrada, matricula, "disponible"));
+		return String.format("%s %s (%sCV) - %s", marca, modelo, cilindrada, matricula);
 	}
 	
 }

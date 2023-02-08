@@ -1,7 +1,5 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo.dominio;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.Objects;
 
 public class Cliente {
