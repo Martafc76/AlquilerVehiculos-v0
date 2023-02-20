@@ -4,8 +4,8 @@ public enum Opcion {
 	
 	SALIR("Salir"), 
     INSERTAR_CLIENTE("Insertar cliente"), 
-    INSERTAR_TURISMO("Insrtar turismo"), 
-    INSERTAR_ALQUILER("Insrtar alquiler"),
+    INSERTAR_TURISMO("Insertar turismo"), 
+    INSERTAR_ALQUILER("Insertar alquiler"),
     BUSCAR_CLIENTE("Buscar cliente"),
     BUSCAR_TURISMO("Buscar turismo"),
     BUSCAR_ALQUILER("Buscar alquiler"),
@@ -27,11 +27,11 @@ public enum Opcion {
 		cadenaAMostrar = nombre;
 	}
 	
-	private boolean esOrdinalValido(int ordinal) {
-		return ordinal > 0 && ordinal < Opcion.values().length;
+	private static boolean esOrdinalValido(int ordinal) {
+		return ordinal >= 0 && ordinal < Opcion.values().length;
 	}
 	
-	public Opcion get(int ordinal) {
+	public static Opcion get(int ordinal) {
 		if(!esOrdinalValido(ordinal)) {
 			throw new IllegalArgumentException("ERROR: El ordinal pasado no es válido");
 		}
@@ -41,7 +41,7 @@ public enum Opcion {
 	
 	@Override
 	public String toString() {
-		return String.format("%d), %S",ordinal(), cadenaAMostrar );
+		return String.format("%d) %s",ordinal(), cadenaAMostrar );
 	}
 
 }
