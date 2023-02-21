@@ -233,12 +233,7 @@ public class Vista {
 
 	private void listarTurismos() {
 		System.out.println("Listar turismos");
-		try {
 			controlador.getTurismos();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
 	}
 
 	private void listarAlquileres() {
@@ -253,22 +248,18 @@ public class Vista {
 
 	private void listarAlquileresCliente() {
 		System.out.println("Listar alquileres de clientes");
-		try {
-			controlador.getAlquileres();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		for(Cliente clientes : controlador.getClientes()) {
+			System.out.println(clientes);
 		}
-
 	}
 
 	private void listarAlquileresTurismo() {
-		Turismo turismo;
+		Turismo turismo = Consola.leerTurismo();
 		System.out.println("Listar alquileres de turismo");
-		for(Alquileres alquileres : controlador.getAlquileres(turismo)) {
+		try {
+		for(Alquiler alquileres : controlador.getAlquileres(turismo)) {
 			System.out.println(alquileres);
 		}
-		try {
-			controlador.getAlquileres(Consola.leerTurismo());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
