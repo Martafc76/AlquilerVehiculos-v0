@@ -153,8 +153,5 @@ public class Consola {
 		return leerFecha("la fecha de devolución");
 
 	}
-
-	/*
-	 * Opcion opcion; switch (opcion) { case BORRAR_ALQUILER: case BORRAR_TURISMO:
-	 */
+	
 }
