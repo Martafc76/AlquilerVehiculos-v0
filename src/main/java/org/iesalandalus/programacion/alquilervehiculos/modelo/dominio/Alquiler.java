@@ -32,10 +32,7 @@ public class Alquiler {
 		setCliente(new Cliente(alquiler.getCliente()));
 		setTurismo(new Turismo(alquiler.getTurismo()));
 		setFechaAlquiler(alquiler.getFechaAlquiler());
-		try {
-			devolver(alquiler.getFechaDevolucion());
-		} catch (OperationNotSupportedException e) {
-		}
+		this.fechaDevolucion = alquiler.getFechaDevolucion();
 		
 	}
 	

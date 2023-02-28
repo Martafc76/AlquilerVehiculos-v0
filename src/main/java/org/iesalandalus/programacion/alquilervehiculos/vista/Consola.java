@@ -22,7 +22,7 @@ public class Consola {
 		for (int i = 0; i < mensaje.length(); i++) {
 			delineado.append("-");
 		}
-		
+
 		System.out.println(delineado);
 	}
 
@@ -44,8 +44,15 @@ public class Consola {
 	}
 
 	private static LocalDate leerFecha(String mensaje) {
+		LocalDate fecha = null;
 		System.out.printf("Introduce %s (%s): ", mensaje, PATRON_FECHA);
-		return LocalDate.parse(Entrada.cadena(), FORMATO_FECHA);
+		try {
+			LocalDate.parse(Entrada.cadena(), FORMATO_FECHA);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("ERROR: La fecha introducida no es válida.");
+		}
+
+		return fecha;
 	}
 
 	public static Opcion elegirOpcion() {
@@ -66,31 +73,18 @@ public class Consola {
 
 	public static Cliente leerCliente() {
 		Cliente cliente = null;
-		do {
-			System.out.println("Introduce los datos del cliente: ");
 
-			try {
-				cliente = new Cliente(leerNombre(), leerCadena("el dni"), leerTelefono());
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		} while (cliente == null);
+		cliente = new Cliente(leerNombre(), leerCadena("el dni"), leerTelefono());
+
 		return cliente;
 
 	}
 
 	public static Cliente leerClienteDni() {
 		Cliente cliente = null;
-		do {
-			try {
-				cliente = Cliente.getClienteConDni(leerCadena("el dni del cliente"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		} while (cliente == null);
+		cliente = Cliente.getClienteConDni(leerCadena("el dni del cliente"));
 
 		return cliente;
-
 
 	}
 
@@ -105,29 +99,15 @@ public class Consola {
 
 	public static Turismo leerTurismo() {
 		Turismo turismo = null;
-		do {
-			System.out.println("Introduce los datos del turismo: ");
-
-			try {
-				turismo = new Turismo(leerCadena("la marca"), leerCadena("el modelo"), leerEntero("la cilindrada"),
-						leerCadena("la matricula"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		} while (turismo == null);
+		turismo = new Turismo(leerCadena("la marca"), leerCadena("el modelo"), leerEntero("la cilindrada"),
+				leerCadena("la matricula"));
 		return turismo;
 
 	}
 
 	public static Turismo leerTurismoMatricula() {
 		Turismo turismo = null;
-		do {
-			try {
-				turismo = Turismo.getTurismoConMatricula(leerCadena("la matricula del turismo"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		} while (turismo == null);
+		turismo = Turismo.getTurismoConMatricula(leerCadena("la matricula del turismo"));
 
 		return turismo;
 
@@ -136,15 +116,9 @@ public class Consola {
 //cliente,turismo,fechaAlquiler
 	public static Alquiler leerAlquiler() {
 		Alquiler alquiler = null;
-		do {
-			System.out.println("Introduce los datos del alquiler: ");
 
-			try {
-				alquiler = new Alquiler(leerCliente(), leerTurismo(), leerFecha("la fecha"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		} while (alquiler == null);
+		alquiler = new Alquiler(leerClienteDni(), leerTurismoMatricula(), leerFecha("la fecha de alquiler"));
+
 		return alquiler;
 
 	}
@@ -153,5 +127,5 @@ public class Consola {
 		return leerFecha("la fecha de devolución");
 
 	}
-	
+
 }
